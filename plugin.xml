@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-iovation" version="0.0.1">
+    <name>cordova-plugin-iovation</name>
+    <description>Cordova iovation plugin</description>
+
+    <engines>
+        <engine name="cordova" version=">= 3.0" />
+    </engines>
+
+    <js-module src="www/iovation.js" name="Iovation">
+        <clobbers target="window.Iovation" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="Iovation">
+                <param name="android-package" value="org.apache.cordova.iovation.Iovation" />
+            </feature>
+        </config-file>
+        <source-file src="lib/android/deviceprint-release-2.2.0.aar" target-dir="libs" framework="true" />
+        <source-file src="src/android/Iovation.java" target-dir="src/org/apache/cordova/iovation"/>
+    </platform>
+
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Iovation">
+                <param name="ios-package" value="Iovation" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/Iovation.h" />
+        <source-file src="src/ios/Iovation.m" />
+
+        <framework src="CoreTelephony.framework" />
+        <framework src="SystemConfiguration.framework" />
+        <framework src="ExternalAccessory.framework" />
+        <framework src="AdSupport.framework" />
+        <framework src="CoreLocation.framework" />
+        <framework src="lib/ios/iovation.framework" custom="true" />
+    </platform>
+
+</plugin>
